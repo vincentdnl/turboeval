@@ -1,0 +1,8 @@
+node_modules/
+.turboeval/
+.idea/
+.pi/
+.devcontainer/
+AGENTS.md
+.env
+.DS_Store
