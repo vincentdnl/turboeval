@@ -1,6 +1,33 @@
 # Turbo Eval
 
-Fast, minimalistic LLM as Judge eval framework based on Jev and Jev-like models.
+Fast, minimalistic, framework-agnostic, LLM as Judge eval framework based on Jev and Jev-like models. Written in TypeScript. Functional programming first.
+
+## Install
+
+ ```sh                                                                                                                        
+   npm install github:vincentdnl/turboeval                                                                                    
+ ```     
+
+## Basic usage
+
+```ts
+import { configureGEval, jevOpenRouter } from "turboeval";
+import type { TestCase } from "turboeval";
+
+const gEval = configureGEval({ judge: jevOpenRouter, threshold: 0.7 });
+
+const testCase: TestCase = {
+  input: "I want a refund for order #4521",
+  expectedOutput: "The refund for order #4521 was issued.",
+  actualOutput: "I've issued your refund for order #4521.",
+};
+
+const result = await gEval.correctness().measure(testCase);
+
+if (!result.success) {
+  throw new Error(`Score ${result.score} is below ${result.threshold}`);
+}
+```
 
 ## Cost reporting
 
